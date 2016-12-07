@@ -2,6 +2,7 @@
 void
 Guardar_Partida (void)
 {
+/*=======================Funcion para guardar una partida====================*/
 /*Crear archivo para guardar jugadas */
   int Numero_Partida = 1;
   FILE *fichero = 0;
@@ -11,12 +12,12 @@ Guardar_Partida (void)
   int y_final = 0;
 
   fichero = fopen ("PartidasGuardadas.txt", "w+");
-  if (fichero == 0)
+  if (fichero == 0)			/*Condicion si el fichero no existe*/
     {
       /* no se pudo abrir el archivo */
       return -1;
     }
-
+=
   fprintf (fichero, "Partida numero:%d\n", Numero_Partida);
   fputs ("x inicial  y inicial  x final  y final   Jugador 1\n", fichero);
   fprintf (fichero, "%d             %d          %d         %d\n", x_inicial,
@@ -26,27 +27,27 @@ Guardar_Partida (void)
      fichero);
   fclose (fichero);
   printf ("Archivo Guardado\n");
-}
+=}
 
 void
 continuar_partida (char archivo[100])
 {
-/*Función que abre una partida ya guardada*/
+/*======================Función que abre una partida ya guardada========================*/
   FILE *fichero = 0;
-
+	
   char tablero[8][8];
   size_t n = 0;
-  fichero = fopen ("PartidasGuardada.txt", "r");
+=  fichero = fopen ("PartidasGuardada.txt", "r");	/*abre el fichero*/
 
   if (fp == 0)
 
     {
 
-      printf ("No se pudo abrir el archivo");
+      printf ("No se pudo abrir el archivo");		/*Condicion si no existe el fichero*/
 
     }
 
-
+=
 
   n = fread (tablero, sizeof (char), 64, fichero);
 
@@ -54,9 +55,9 @@ continuar_partida (char archivo[100])
 
     {
 
-      printf ("Se leyeron los datos correctamente");
+      printf ("Se leyeron los datos correctamente");		/*Imprime la aceptacion del fichero*/
 
-    }
+=    }
 
 
 
@@ -66,7 +67,7 @@ continuar_partida (char archivo[100])
 
 /*Propongo que reciba el jugador para guardar las jugadas de cada juguador por separado y las coordenadas para despues guardarlas en el archivo*/
 void
-Coordenadas_Recibidas (int jugador, int x_inicial, int y_inicial, int x_final, int y_final)
+=Coordenadas_Recibidas (int jugador, int x_inicial, int y_inicial, int x_final, int y_final)
 {
 /*En el arreglo use 160 ya que no se puede saber cuantas jugadas va a tener cada partida*/
   int coordenadas[2][4][160];	/*Propongo que en coordenadas[1][][] sean las jugadas del jugador 1 y en coordenadas[2][][] las del 2 */
@@ -74,28 +75,28 @@ Coordenadas_Recibidas (int jugador, int x_inicial, int y_inicial, int x_final, i
     {
 
     }
-  if (jugador == 2)
-    {				/*Cuando la partida es contra IA se tomaria como jugador 2 */
-
+=  if (jugador == 2)
+*    {				/*Cuando la partida es contra IA se tomaria como jugador 2 */
+=
     }
-  else
+=  else
     {
       return 0;
       /*Guardar las coordenas de la siguiente manera
          Jugador 1:
          x_inicial y_inicial  x_final  y_final
-         posicion arreglo     [0]       [1]       [2]      [3]
+=         posicion arreglo     [0]       [1]       [2]      [3]
          al final mandar el arreglo a Guardar_Partida() para agregar las coordenas al archivo */
-    }
+=    }
 
-}
+=}
 
 
 void
 obten_hora (void)
 {
-  /* Esta función obtiene la hora en que se salvo la partida */
-  FILE *archivo = fopen ("hora.txt", "w+");
+  /* ===========================Función que obtiene la hora en que se salvo la partida=========================== */
+  FILE *archivo = fopen ("hora.txt", "w+"); /*Abre el archivo de hras*/
 
   time_t tiempo = time (0);
   struct tm *tiempo_local = localtime (&tiempo);
@@ -112,7 +113,8 @@ void
 actualiza_historial (int resultado)
 {
 
-/* Esta función guarda/atualiza el registro de vistorias de cada jugador en un archivo diferente.
+/* ===============================================================================================================
+Esta función guarda/atualiza el registro de vistorias de cada jugador en un archivo diferente.
 -Se requiere una función del modulo de tablero, que indique que jugador a ganado y con que piezas (blancas o negras)
 -Podemos asumir que el tipo de dato que indica el resultado de la partida es un entero y que representa siguiente
         0=victoria de jugador 1 con blancas.
